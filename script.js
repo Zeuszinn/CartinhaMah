@@ -1,87 +1,44 @@
-/* ==============================
-   TROCAR TELAS
-================================ */
-function trocarTela(num) {
-  document.querySelectorAll('.tela')
-    .forEach(tela => tela.classList.remove('ativa'));
+function trocarTela(numero) {
+  document.querySelectorAll(".tela").forEach(tela => {
+    tela.classList.remove("ativa");
+  });
 
-  document.getElementById('tela' + num)
-    .classList.add('ativa');
+  document.getElementById("tela" + numero).classList.add("ativa");
 }
 
-/* ==============================
-   BOTÕES
-================================ */
-const btnNao = document.getElementById('btnNao');
-const btnSim = document.getElementById('btnSim');
+const btnSim = document.getElementById("btnSim");
+const btnNao = document.getElementById("btnNao");
 
-let fugasSim = 0;
+let fugidasSim = 0;
 
-/* ==============================
-   FUNÇÃO DE FUGA
-================================ */
-function fugir(botao, tipo = "normal") {
-  const area = document.querySelector('.botoes');
+if (btnSim && btnNao) {
+  btnNao.addEventListener("click", () => {
+    moverBotao(btnNao);
+  });
 
-  let maxX = area.clientWidth - botao.offsetWidth;
-  let maxY = area.clientHeight - botao.offsetHeight;
-
-  if (tipo === "longe") {
-    maxX = area.clientWidth * 0.9;
-    maxY = area.clientHeight * 0.9;
-  }
-
-  let x = Math.random() * maxX;
-  let y = Math.random() * maxY;
-
-  if (tipo === "longe" && Math.random() > 0.5) {
-    x = Math.random() > 0.5 ? 10 : maxX - 10;
-    y = Math.random() > 0.5 ? 10 : maxY - 10;
-  }
-
-  botao.style.left = x + 'px';
-  botao.style.top = y + 'px';
+  btnSim.addEventListener("click", () => {
+    if (fugidasSim < 3) {
+      moverBotao(btnSim, true);
+      fugidasSim++;
+    } else {
+      trocarTela(3);
+    }
+  });
 }
 
-/* ==============================
-   EVENTOS
-================================ */
+function moverBotao(botao, longe = false) {
+  const area = document.querySelector(".botoes");
+  const areaRect = area.getBoundingClientRect();
 
-/* NÃO → foge sempre */
-btnNao.addEventListener('click', (e) => {
-  e.preventDefault();
-  fugir(btnNao);
-});
+  const maxX = areaRect.width - botao.offsetWidth;
+  const maxY = areaRect.height - botao.offsetHeight;
 
-/* SIM → foge mais longe só 3 vezes */
-btnSim.addEventListener('click', (e) => {
-  e.preventDefault();
+  const fator = longe ? 0.9 : 0.5;
 
-  if (fugasSim < 3) {
-    fugir(btnSim, "longe");
-    fugasSim++;
-  } else {
-    trocarTela(3);
-  }
-});
+  const x = Math.random() * maxX * fator;
+  const y = Math.random() * maxY * fator;
 
-/* ==============================
-   CORAÇÕES ANIMADOS
-================================ */
-function criarCoracao() {
-  const coracao = document.createElement('div');
-  coracao.classList.add('coracao');
-  coracao.innerHTML = '💗';
-
-  coracao.style.left = Math.random() * window.innerWidth + 'px';
-  coracao.style.fontSize = (Math.random() * 20 + 12) + 'px';
-  coracao.style.animationDuration = (Math.random() * 3 + 4) + 's';
-
-  document.body.appendChild(coracao);
-
-  setTimeout(() => {
-    coracao.remove();
-  }, 7000);
+  botao.style.position = "absolute";
+  botao.style.left = x + "px";
+  botao.style.top = y + "px";
 }
-
-setInterval(criarCoracao, 300);

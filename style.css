@@ -1,121 +1,74 @@
-:root {
-  --roxo: #7b2cbf;
-  --rosa: #ff4d8d;
-  --fundo: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
-}
-
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
-  min-height: 100vh;
-  background: var(--fundo);
-  overflow: hidden;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #7b2cbf, #ff6ec7);
   color: white;
+  min-height: 100vh;
 }
 
+/* TELAS */
 .tela {
   display: none;
-  height: 100vh;
-  width: 100%;
+  min-height: 100vh;
   padding: 20px;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .tela.ativa {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 1.1em;
-  max-width: 500px;
+/* BOTÕES */
+.botoes {
+  position: relative;
+  margin-top: 20px;
 }
 
 button {
-  margin-top: 20px;
-  padding: 14px 26px;
-  font-size: 1.1em;
+  padding: 12px 25px;
+  font-size: 18px;
   border: none;
-  border-radius: 30px;
+  border-radius: 25px;
   cursor: pointer;
-  background: var(--rosa);
-  color: white;
-  transition: transform 0.2s;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-.botoes {
-  position: relative;
-  width: 100%;
-  height: 220px;
-}
-
-/* POSIÇÃO INICIAL DOS BOTÕES (MAIS PRÓXIMOS E CENTRALIZADOS) */
-#btnSim {
-  position: absolute;
-  left: 44%;
-  top: 80px;
-}
-
-#btnNao {
-  position: absolute;
-  left: 54%;
-  top: 80px;
-}
-
-/* AJUSTE FINO PARA CELULAR */
-@media (max-width: 600px) {
-  #btnSim {
-    left: 40%;
-  }
-
-  #btnNao {
-    left: 56%;
-  }
+  margin: 10px;
 }
 
 /* CARTA */
 .carta {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 25px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 20px;
   border-radius: 20px;
   max-width: 600px;
-  backdrop-filter: blur(10px);
+  width: 100%;
+  max-height: 80vh;          /* 🔥 ISSO RESOLVE O CELULAR */
+  overflow-y: auto;          /* 🔥 SCROLL INTERNO */
 }
 
-/* CORAÇÕES */
-.coracao {
-  position: fixed;
-  bottom: -30px;
-  color: pink;
-  font-size: 20px;
-  animation: flutuar 6s linear infinite;
-  opacity: 0.8;
-  pointer-events: none;
-  z-index: 9999;
+/* TEXTO */
+.carta p {
+  line-height: 1.6;
+  font-size: 16px;
 }
 
-@keyframes flutuar {
-  from {
-    transform: translateY(0) scale(0.8);
-    opacity: 1;
+/* AJUSTE FINO PRA TELAS PEQUENAS */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
   }
-  to {
-    transform: translateY(-120vh) scale(1.4);
-    opacity: 0;
+
+  .carta {
+    max-height: 75vh;
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
   }
 }

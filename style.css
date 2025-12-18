@@ -1,0 +1,121 @@
+:root {
+  --roxo: #7b2cbf;
+  --rosa: #ff4d8d;
+  --fundo: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--fundo);
+  overflow: hidden;
+  color: white;
+}
+
+.tela {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tela.ativa {
+  display: flex;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1em;
+  max-width: 500px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 14px 26px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: var(--rosa);
+  color: white;
+  transition: transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.botoes {
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+/* POSIÇÃO INICIAL DOS BOTÕES (MAIS PRÓXIMOS E CENTRALIZADOS) */
+#btnSim {
+  position: absolute;
+  left: 44%;
+  top: 80px;
+}
+
+#btnNao {
+  position: absolute;
+  left: 54%;
+  top: 80px;
+}
+
+/* AJUSTE FINO PARA CELULAR */
+@media (max-width: 600px) {
+  #btnSim {
+    left: 40%;
+  }
+
+  #btnNao {
+    left: 56%;
+  }
+}
+
+/* CARTA */
+.carta {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 600px;
+  backdrop-filter: blur(10px);
+}
+
+/* CORAÇÕES */
+.coracao {
+  position: fixed;
+  bottom: -30px;
+  color: pink;
+  font-size: 20px;
+  animation: flutuar 6s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes flutuar {
+  from {
+    transform: translateY(0) scale(0.8);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh) scale(1.4);
+    opacity: 0;
+  }
+}
